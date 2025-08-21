@@ -9,5 +9,5 @@ mod macros {
 }
 
 fn main() {
-    my_macro!();
+    macros.my_macro!();
 }
