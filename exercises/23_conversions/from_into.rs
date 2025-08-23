@@ -37,13 +37,27 @@ impl From<&str> for Person {
     fn from(s: &str) -> Self {
         let mut splitted_s = s.split(",");
 
+        if splitted_s.clone().count() != 2 {
+            return Default::default();
+        }
+
         let mut output: Person = Default::default();
 
         if let Some(i) = splitted_s.next() {
+            if i == "" {
+                return Default::default();
+            }
             output.name = String::from(i);
         }
         if let Some(i) = splitted_s.next() {
-            output.age = i as u8;
+            if i == "" {
+                return Default::default();
+            }
+            if let Ok(i) = i.parse::<u8>() {
+                output.age = i;
+            } else {
+                return Default::default();
+            }
         }
 
         // Default::default()
